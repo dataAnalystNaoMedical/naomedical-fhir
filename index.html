@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Architecture: FHIR Data Integration Service | Nao Medical</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .prose-custom h2, .prose-custom h3 {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .prose-custom code {
+            background-color: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            color: #1e365f;
+        }
+        .prose-custom pre {
+            background-color: #1e365f;
+            color: #e9f3f4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .prose-custom blockquote {
+            border-left: 4px solid #4DA886;
+            padding-left: 1rem;
+            color: #4b5563;
+        }
+        .nav-link.active {
+            color: #4DA886;
+            font-weight: 600;
+            border-left-color: #4DA886;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'white': '#ffffff',
+                        'trust-blue': '#1e365f',
+                        'healthcare-green': '#4DA886',
+                        'calming-accent': '#e9f3f4',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-30">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <img class="h-8 w-auto" src="https://naomedical.com/main-page-assets/images/Nao-Medical-Logo-3.svg" alt="Nao Medical Logo">
+                </div>
+                <div class="hidden md:block">
+                     <p class="text-trust-blue font-semibold">Service Documentation</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+            
+            <!-- Left Sidebar Navigation -->
+            <aside class="hidden lg:block lg:col-span-3">
+                <nav id="sidebar-nav" class="sticky top-24">
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="nav-link block text-gray-600 hover:text-trust-blue border-l-2 border-transparent pl-4 py-1 transition-colors duration-200">1. Project Overview</a></li>
+                        <li><a href="#architecture" class="nav-link block text-gray-600 hover:text-trust-blue border-l-2 border-transparent pl-4 py-1 transition-colors duration-200">2. High-Level Architecture</a></li>
+                        <li><a href="#components" class="nav-link block text-gray-600 hover:text-trust-blue border-l-2 border-transparent pl-4 py-1 transition-colors duration-200">3. Core Components</a>
+                            <ul class="mt-2 ml-4 space-y-2 text-sm">
+                                <li><a href="#prerequisites" class="nav-link block text-gray-500 hover:text-trust-blue border-l-2 border-transparent pl-4 transition-colors duration-200">3.1. Pre-Requisites</a></li>
+                                <li><a href="#initiation" class="nav-link block text-gray-500 hover:text-trust-blue border-l-2 border-transparent pl-4 transition-colors duration-200">3.2. Request Initiation</a></li>
+                                <li><a href="#webhook" class="nav-link block text-gray-500 hover:text-trust-blue border-l-2 border-transparent pl-4 transition-colors duration-200">3.3. Webhook Logging</a></li>
+                                <li><a href="#processing" class="nav-link block text-gray-500 hover:text-trust-blue border-l-2 border-transparent pl-4 transition-colors duration-200">3.4. Processing Engine</a></li>
+                                <li><a href="#filestructure" class="nav-link block text-gray-500 hover:text-trust-blue border-l-2 border-transparent pl-4 transition-colors duration-200">3.5. File Structure</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#admin-api" class="nav-link block text-gray-600 hover:text-trust-blue border-l-2 border-transparent pl-4 py-1 transition-colors duration-200">4. Admin & API Layer</a></li>
+                        <li><a href="#security" class="nav-link block text-gray-600 hover:text-trust-blue border-l-2 border-transparent pl-4 py-1 transition-colors duration-200">5. Security & Compliance</a></li>
+                        <li><a href="#conclusion" class="nav-link block text-gray-600 hover:text-trust-blue border-l-2 border-transparent pl-4 py-1 transition-colors duration-200">6. Conclusion</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Documentation Content -->
+            <main class="lg:col-span-9">
+                <article class="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-sm ring-1 ring-gray-900/5 prose-custom max-w-none">
+                    <div class="mb-8">
+                        <span class="text-healthcare-green font-semibold">Technical Architecture</span>
+                        <h1 class="text-3xl md:text-4xl font-bold text-trust-blue mt-2">FHIR Data Integration Service for Nao Medical</h1>
+                        <p class="text-lg text-gray-600 mt-4">A Secure, Scalable Pipeline for Patient Record Retrieval via Connective Health.</p>
+                    </div>
+
+                    <section id="overview">
+                        <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
+                            <!-- Placeholder for a decorative SVG icon -->
+                            <svg class="w-6 h-6 mr-3 text-healthcare-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V7a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            1. Project Overview
+                        </h2>
+                        <p>This document details the technical architecture and implementation of a robust cloud-based service developed by Nao Medical. The system seamlessly integrates with <strong>Connective Health's API</strong> to automate the retrieval of standardized patient medical records (FHIR resources and clinical summaries) directly into Nao Medical's ecosystem.</p>
+                        <p>The primary objective is to provide patients and authorized medical staff with swift, secure, and hassle-free access to historical patient data from external providers, significantly enhancing care continuity and patient experience.</p>
+                        <blockquote>
+                            <p><strong>Core Technologies:</strong> Python (FastAPI/Flask), AWS S3 (or Azure Blob Storage), Webhooks, REST APIs, FHIR (R4), MongoDB (flexible dependency on implementations)</p>
+                        </blockquote>
+                    </section>
+                    
+                    <section id="architecture">
+                        <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
+                            <!-- Placeholder for a decorative SVG icon -->
+                            <svg class="w-6 h-6 mr-3 text-healthcare-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            2. High-Level Architecture & Workflow
+                        </h2>
+                        <p>The system is designed as an event-driven, decoupled architecture for maximum reliability and scalability. The following diagram illustrates the end-to-end workflow:</p>
+                        <div class="my-6 bg-calming-accent p-4 rounded-lg flex justify-center">
+                            <img src="https://raw.githubusercontent.com/dataAnalystNaoMedical/AstoriaTimeSeries/refs/heads/main/mermaid2.png" alt="Workflow Diagram" class="rounded-md shadow-md bg-white">
+                        </div>
+                    </section>
+
+                    <section id="components">
+                        <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
+                            <!-- Placeholder for a decorative SVG icon -->
+                            <svg class="w-6 h-6 mr-3 text-healthcare-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            3. Core Components & Technical Deep Dive
+                        </h2>
+
+                        <div id="prerequisites">
+                            <h3 class="text-xl font-semibold text-trust-blue">3.1. Pre-Requisites & Setup</h3>
+                            <p>To establish a connection with Connective Health, a one-time secure setup is required:</p>
+                            <ol class="list-decimal pl-6 space-y-2">
+                                <li><strong>Cloud Storage Bucket:</strong> A dedicated S3 bucket (or Azure Blob Storage container) is provisioned with write permissions granted exclusively to Connective Health's IP range/service account.</li>
+                                <li><strong>Webhook Endpoint:</strong> A secure, publicly accessible API endpoint (<code>https://api.naomedical.com/connective-health/webhook</code>) is set up to receive status updates. This endpoint validates incoming requests using a shared secret or JWT verification.</li>
+                                <li><strong>API Credentials:</strong> Connective Health provides API keys and credentials for authenticating outbound requests from Nao Medical's systems.</li>
+                            </ol>
+                        </div>
+                        
+                        <div id="initiation">
+                            <h3 class="text-xl font-semibold text-trust-blue">3.2. The Request Initiation Process</h3>
+                            <p>The process begins when a patient appointment is created in Nao Medical's EMR.</p>
+                             <ol class="list-decimal pl-6 space-y-2">
+                                <li><strong>EMR Integration:</strong> Our internal system generates a unique <strong>Medical Record Number (MRN)</strong> for the patient-appointment combination.</li>
+                                <li><strong>API Payload Construction:</strong> A server-side process constructs a precisely formatted JSON payload for the Connective Health <code>$request-record</code> endpoint. The payload includes patient demographics, appointment context, and unique identifiers.</li>
+                                <li><strong>API Call:</strong> The request is sent to Connective Health's API using HTTPS with mutual TLS (mTLS) or API key authentication.</li>
+                                <li><strong>Correlation ID:</strong> Upon a successful request (HTTP 202 Accepted), Connective Health returns a <code>correlation_id</code>. This ID is immediately stored in our database, linked to the <code>MRN</code> and appointment details, for all future tracking.</li>
+                            </ol>
+                        </div>
+
+                        <div id="webhook">
+                            <h3 class="text-xl font-semibold text-trust-blue">3.3. The Webhook Logging Service</h3>
+                            <p>A critical component for real-time monitoring, this service listens for POST requests from Connective Health.</p>
+                            <ul class="list-disc pl-6 space-y-2">
+                                <li><strong>Purpose:</strong> To receive asynchronous updates on the status of a record request (e.g., "request_received", "searching", "records_available", "error").</li>
+                                <li><strong>Implementation:</strong> Built using <strong>FastAPI</strong> for its high-performance asynchronous capabilities. Each webhook payload contains the <code>correlation_id</code> and the status message.</li>
+                                <li><strong>Data Handling:</strong> The service parses the payload and updates the status of the corresponding request in the central metadata database, providing full auditability and transparency into the process. This data powers the admin panel.</li>
+                            </ul>
+                        </div>
+
+                        <div id="processing">
+                            <h3 class="text-xl font-semibold text-trust-blue">3.4. The Processing Engine</h3>
+                            <p>A scheduled, serverless function (e.g., AWS Lambda, Azure Function) that acts as the workhorse of the operation.</p>
+                             <ol class="list-decimal pl-6 space-y-2">
+                                <li><strong>Scan:</strong> It lists the contents of the dedicated S3 bucket, looking for new objects that have been delivered since the last run.</li>
+                                <li><strong>Filter:</strong> It identifies files matching the expected naming pattern: <code>{MRN}-{correlation-id}-{LABEL}.{ext}</code>.</li>
+                                <li><strong>Parse:</strong> The engine extracts the <code>MRN</code> and <code>correlation_id</code> from the filename.</li>
+                                <li><strong>Validate & Update:</strong> It checks the database to confirm the file's <code>correlation_id</code> matches a logged request. It then updates the record's status to "delivered" and logs the file metadata.</li>
+                                <li><strong>Ingest:</strong> The files are then moved to a permanent, secure storage location within Nao Medical's architecture and linked to the correct patient's record in the EMR.</li>
+                            </ol>
+                        </div>
+
+                        <div id="filestructure">
+                            <h3 class="text-xl font-semibold text-trust-blue">3.5. Delivered Records & File Structure</h3>
+                            <p>Connective Health delivers a standardized set of documents for each successful request. The typical package includes:</p>
+                             <ul class="list-disc pl-6 space-y-2">
+                                <li><strong>Full Patient Summary (<code>-fullsummary.pdf</code>):</strong> A human-readable PDF summary.</li>
+                                <li><strong>Quality Summary (<code>-qualitysummary.pdf</code>):</strong> A PDF report with quality measures.</li>
+                                <li><strong>Standardized FHIR Data (<code>-fhir.json</code>):</strong> A JSON file in structured <strong>FHIR R4 format</strong>.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section id="admin-api">
+                        <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
+                             <!-- Placeholder for a decorative SVG icon -->
+                            <svg class="w-6 h-6 mr-3 text-healthcare-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
+                            4. The Nao Medical Admin & API Layer
+                        </h2>
+                        <p>To leverage this powerful pipeline, we built an internal application layer.</p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li><strong>Web Admin Portal (React.js):</strong> A responsive interface for our internal staff to monitor requests, view logs, access files, and trigger re-requests.</li>
+                            <li><strong>Internal REST API:</strong> This API powers the admin portal and exposes secure endpoints such as:
+                                <pre><code class="language-bash">GET /api/record-requests
+GET /api/record-requests/{mrn}
+POST /api/record-requests</code></pre>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="security">
+                        <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
+                            <!-- Placeholder for a decorative SVG icon -->
+                            <svg class="w-6 h-6 mr-3 text-healthcare-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            5. Security & Compliance
+                        </h2>
+                        <p>Security is paramount when handling PHI (Protected Health Information).</p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li><strong>Data in Transit:</strong> All communications are encrypted using TLS 1.2+.</li>
+                            <li><strong>Data at Rest:</strong> All files in S3 and sensitive database fields are encrypted using AES-256.</li>
+                            <li><strong>Access Control:</strong> Strict IAM policies and role-based access control (RBAC) are enforced.</li>
+                            <li><strong>Auditing:</strong> A comprehensive audit log tracks every access to patient data, API call, and status change to ensure HIPAA compliance.</li>
+                        </ul>
+                    </section>
+
+                    <section id="conclusion">
+                        <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
+                             <!-- Placeholder for a decorative SVG icon -->
+                            <svg class="w-6 h-6 mr-3 text-healthcare-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            6. Conclusion
+                        </h2>
+                        <p>This service represents a significant technical achievement for Nao Medical. By building a secure, automated, and scalable bridge to Connective Health, we have eliminated a traditionally manual and time-consuming process. This architecture not only provides immediate value to our patients and clinicians but also establishes a flexible foundation for handling future healthcare data integrations and interoperability initiatives.</p>
+                    </section>
+
+                </article>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-white mt-12 border-t">
+        <div class="max-w-screen-xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <p>&copy; 2024 Nao Medical. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Javascript for scroll-spy active navigation link
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('main section[id]');
+            const navLinks = document.querySelectorAll('#sidebar-nav .nav-link');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                        
+                        // Handle nested links
+                        const parentNavLink = document.querySelector(`.nav-link[href="#${entry.target.parentElement.id}"]`);
+                        if (parentNavLink) {
+                            parentNavLink.classList.add('active');
+                        }
+                    }
+                });
+            }, { rootMargin: '-20% 0px -70% 0px' }); // Adjust rootMargin to trigger highlight at a better position
+
+            sections.forEach(section => {
+                observer.observe(section);
+                // Also observe the direct children of section#components
+                if (section.id === 'components') {
+                     const subSections = section.querySelectorAll('div[id]');
+                     subSections.forEach(sub => observer.observe(sub));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
