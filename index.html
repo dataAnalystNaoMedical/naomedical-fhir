@@ -61,7 +61,6 @@
     </script>
 </head>
 <body class="bg-gray-50 text-gray-700">
-
     <!-- Header -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-30">
         <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -124,7 +123,7 @@
                             <p><strong>Core Technologies:</strong> Python (FastAPI/Flask), AWS S3 (or Azure Blob Storage), Webhooks, REST APIs, FHIR (R4), MongoDB (flexible dependency on implementations)</p>
                         </blockquote>
                     </section>
-                    
+                                        
                     <section id="architecture">
                         <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
                             <!-- Placeholder for a decorative SVG icon -->
@@ -153,7 +152,7 @@
                                 <li><strong>API Credentials:</strong> Connective Health provides API keys and credentials for authenticating outbound requests from Nao Medical's systems.</li>
                             </ol>
                         </div>
-                        
+                                                
                         <div id="initiation">
                             <h3 class="text-xl font-semibold text-trust-blue">3.2. The Request Initiation Process</h3>
                             <p>The process begins when a patient appointment is created in Nao Medical's EMR.</p>
@@ -205,7 +204,9 @@
                             4. The Nao Medical Admin & API Layer
                         </h2>
                         <p>To leverage this powerful pipeline, we built an internal application layer.</p>
-                        <ul class="list-disc pl-6 space-y-2">
+                        <!-- === NEW LINK ADDED HERE === -->
+                        <p>A demo of API documentation is available <a href="vendor-docs.html" class="text-healthcare-green hover:underline font-semibold">here to read</a>.</p>
+                        <ul class="list-disc pl-6 space-y-2 mt-4">
                             <li><strong>Web Admin Portal (React.js):</strong> A responsive interface for our internal staff to monitor requests, view logs, access files, and trigger re-requests.</li>
                             <li><strong>Internal REST API:</strong> This API powers the admin portal and exposes secure endpoints such as:
                                 <pre><code class="language-bash">GET /api/record-requests
