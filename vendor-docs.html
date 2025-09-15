@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor API Documentation | Nao Medical</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .prose-custom h2, .prose-custom h3 {
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .prose-custom code {
+            background-color: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            color: #1e365f;
+        }
+        .prose-custom pre {
+            background-color: #1e365f;
+            color: #e9f3f4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .prose-custom blockquote {
+            border-left: 4px solid #4DA886;
+            padding-left: 1rem;
+            color: #4b5563;
+        }
+        .prose-custom table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .prose-custom th, .prose-custom td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .prose-custom th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'white': '#ffffff',
+                        'trust-blue': '#1e365f',
+                        'healthcare-green': '#4DA886',
+                        'calming-accent': '#e9f3f4',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-700">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-30">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <img class="h-8 w-auto" src="https://naomedical.com/main-page-assets/images/Nao-Medical-Logo-3.svg" alt="Nao Medical Logo">
+                </div>
+                <div class="hidden md:block">
+                    <a href="https://dataanalystnaomedical.github.io/naomedical-fhir/"> 
+                        <p class="text-trust-blue font-semibold">Back To Service Documentation</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <main>
+            <article class="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-sm ring-1 ring-gray-900/5 prose-custom max-w-none">
+                <div class="mb-8">
+                    <span class="text-healthcare-green font-semibold">API Reference</span>
+                    <h1 class="text-3xl md:text-4xl font-bold text-trust-blue mt-2">Vendor API Documentation</h1>
+                    <p class="text-lg text-gray-600 mt-4">These endpoints allow secure access to patient and FHIR data for approved vendors. All requests must include the <code>apiKey</code> header.</p>
+                </div>
+
+                <hr class="my-8"/>
+
+                <section id="authentication">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
+                        <svg class="w-6 h-6 mr-3 text-healthcare-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H5v-2H3v-2H1v-4a6 6 0 016-6h4a6 6 0 016 6z"></path></svg>
+                        Authentication
+                    </h2>
+                    <p>All API requests must include the following HTTP header:</p>
+                    <pre><code>apiKey: YOUR_API_KEY_HERE</code></pre>
+                </section>
+                
+                <hr class="my-8"/>
+
+                <section id="lookup-patient">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">1. Lookup Patient</h2>
+                    <p class="mt-4"><span class="font-semibold bg-green-100 text-green-800 rounded-md px-2 py-1 text-sm">GET</span> <code>/api/lookup-patient</code></p>
+                    <p class="mt-4">Returns a list of all matched patients based on provided criteria.</p>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameters (required):</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>firstName</code> (string)</li>
+                        <li><code>lastName</code> (string)</li>
+                        <li><code>dob</code> (YYYY-MM-DD)</li>
+                    </ul>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request:</h3>
+                    <pre><code class="language-bash">curl -X GET "https://yourdomain.com/api/lookup-patient?firstName=John&lastName=Doe&dob=1980-01-01" \
+  -H "apiKey: YOUR_API_KEY_HERE"</code></pre>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Response:</h3>
+                    <pre><code class="language-json">{
+  "patient": [
+    {
+      "patient_first_name": "JOHN",
+      "patient_last_name": "DOE",
+      "zip":"12345",
+      ...
+    },
+    {
+      "patient_first_name": "JOHN",
+      "patient_last_name": "DOE",
+      "zip":"12346",
+      ...
+    }
+  ]
+}</code></pre>
+                </section>
+
+                <hr class="my-8"/>
+
+                <section id="generate-mrn">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">2. Generate MRN (Create Lead)</h2>
+                    <p class="mt-4"><span class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span> <code>/api/generate-mrn</code></p>
+                    <p class="mt-4">Creates a new patient lead and returns the generated MRN and timestamps.</p>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Required JSON Body:</h3>
+                    <pre><code class="language-json">{
+  "firstName": "John",
+  "lastName": "Doe",
+  "dob": "1980-01-01",
+  "zip": "12345",
+  "phone": "555-1234",
+  "email": "john.doe@example.com",
+  "gender": "male",
+  "city": "New York",
+  "state": "NY",
+  "address": "123 Main St"
+}</code></pre>
+                    <pre><code>{gender : male-or-female }</code></pre>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request:</h3>
+                    <pre><code class="language-bash">curl -X POST https://yourdomain.com/api/generate-mrn \
+  -H "Content-Type: application/json" \
+  -H "apiKey: YOUR_API_KEY_HERE" \
+  -d '{
+    "firstName": "John",
+    "lastName": "Doe",
+    "dob": "1980-01-01",
+    "zip": "12345",
+    "phone": "555-1234",
+    "email": "john.doe@example.com",
+    "gender": "male",
+    "city": "New York",
+    "state": "NY",
+    "address": "123 Main St"
+  }'</code></pre>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Response:</h3>
+                    <pre><code class="language-json">{
+  "mrn": "123456789",
+  "created_at": "2024-06-01T12:34:56Z",
+  "updated_at": "2024-06-01T12:34:56Z",
+  "epoch": 1712345678
+}</code></pre>
+                </section>
+
+                <hr class="my-8"/>
+
+                <section id="request-fhir">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">3. Request FHIR Data</h2>
+                    <p class="mt-4"><span class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span> <code>/api/request-fhir-data?mrn=GENERATEDMRN</code></p>
+                    <p class="mt-4">Triggers a FHIR data pull for a patient using their MRN. The MRN must be provided as a query parameter.</p>
+                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameter (required):</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>mrn</code> (string) — The MRN (patient account number) to request FHIR data for.</li>
+                    </ul>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request:</h3>
+                    <pre><code class="language-bash">curl -X POST "https://yourdomain.com/api/request-fhir-data?mrn=123456789" \
+  -H "apiKey: YOUR_API_KEY_HERE"</code></pre>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Response:</h3>
+                    <pre><code class="language-json">{
+  "status": "pending",
+  "message": "FHIR data pull initiated"
+}</code></pre>
+                </section>
+
+                <hr class="my-8"/>
+                
+                <section id="pdf-status">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">4. PDF Status</h2>
+                    <p class="mt-4"><span class="font-semibold bg-green-100 text-green-800 rounded-md px-2 py-1 text-sm">GET</span> <code>/api/pdf-status?mrn=GENERATEDMRN</code></p>
+                    <p class="mt-4">Checks the PDF file sync status for a given MRN. Returns whether the PDF is synced, pending, or not found.</p>
+                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameter (required):</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>mrn</code> (string) — The MRN (patient account number) to check status for.</li>
+                    </ul>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request:</h3>
+                    <pre><code class="language-bash">curl -X GET "https://yourdomain.com/api/pdf-status?mrn=123456789" \
+  -H "apiKey: YOUR_API_KEY_HERE"</code></pre>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Responses:</h3>
+                    <p><em>Synced:</em></p>
+                    <pre><code class="language-json">{
+  "status": "synced",
+  "info": {
+    "files": [ ... ]
+  }
+}</code></pre>
+                    <p class="mt-4"><em>Pending:</em></p>
+                    <pre><code class="language-json">{
+  "status": "pending",
+  "info": {
+    "message": "Please wait 15 minutes for the sync.",
+    "files": {"fcount": 2}
+  }
+}</code></pre>
+                    <p class="mt-4"><em>No Files Found:</em></p>
+                    <pre><code class="language-json">{
+  "status": "no-files-found"
+}</code></pre>
+                    <p class="mt-4"><em>Failed to Search:</em></p>
+                    <pre><code class="language-json">{
+  "status": "failed-to-search"
+}</code></pre>
+                </section>
+
+                <hr class="my-8"/>
+
+                <section id="temporary-link">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">5. Generate Temporary Link</h2>
+                    <p class="mt-4"><span class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span> <code>/api/get-temporary-link</code></p>
+                     <p class="mt-4">Generates a time-limited access link for a vendor to retrieve a specific resource stored in Google Cloud Storage.</p>
+                    <blockquote>Note: here we can use the parsed response from pdf-status endpoint</blockquote>
+                    
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Request Headers:</h3>
+                     <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>Content-Type: application/json</code> (required)</li>
+                        <li><code>apiKey: your-key</code> (required)</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Body Parameters (JSON):</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>uri</code></td>
+                                <td>string</td>
+                                <td>The Google Cloud Storage URI (gs:// path) of the file to generate a link for</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td><code>expiration_time</code></td>
+                                <td>integer</td>
+                                <td>Duration in seconds for which the generated link should remain valid</td>
+                                <td>Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request:</h3>
+                    <pre><code class="language-bash">curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "apiKey: your-key" \
+  -d '{
+    "uri": "gs://connective_health_prod_feb7/1753506022_717f6a6f-1f54-49e5-9f39-712b87ef3ecf_2025_07_26_PATIENT_SUMMARY.pdf",
+    "expiration_time": 120
+  }' \
+  https://fhir-demo-564097302460.us-central1.run.app/api/get-temporary-link</code></pre>
+                    
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Success Response (200 OK):</h3>
+                    <pre><code class="language-json">{
+  "temporary_url": "https://storage.googleapis.com/...?GoogleAccessId=...&Expires=...&Signature=...",
+  "expiration_time": 120,
+  "expires_at": "2025-07-26T15:30:45Z"
+}</code></pre>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Error Responses:</h3>
+                     <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>400 Bad Request</code> - Invalid request parameters</li>
+                        <li><code>401 Unauthorized</code> - Invalid or missing API key</li>
+                        <li><code>404 Not Found</code> - The specified file does not exist</li>
+                        <li><code>500 Internal Server Error</code> - Server error while processing the request</li>
+                    </ul>
+                </section>
+                
+                <hr class="my-8"/>
+                
+                <section id="error-handling">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">Error Handling</h2>
+                    <ul class="list-disc pl-6 space-y-2 mt-4">
+                        <li>All errors are returned as JSON with an <code>error</code> field and appropriate HTTP status code.</li>
+                        <li>Example:
+                            <pre><code class="language-json">{
+  "error": "Missing required fields: firstName, lastName, dob"
+}</code></pre>
+                        </li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-white mt-12 border-t">
+        <div class="max-w-screen-xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <p>&copy; 2024 Nao Medical. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
