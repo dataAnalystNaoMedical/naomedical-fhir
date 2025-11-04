@@ -1,25 +1,28 @@
-<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendor API Documentation | Nao Medical</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .prose-custom h2, .prose-custom h3 {
+
+        .prose-custom h2,
+        .prose-custom h3 {
             border-bottom: 1px solid #e5e7eb;
             padding-bottom: 0.5rem;
             margin-top: 2.5rem;
             margin-bottom: 1.5rem;
         }
+
         .prose-custom code {
             background-color: #f3f4f6;
             padding: 0.2rem 0.4rem;
@@ -27,6 +30,7 @@
             font-size: 0.9em;
             color: #1e365f;
         }
+
         .prose-custom pre {
             background-color: #1e365f;
             color: #e9f3f4;
@@ -34,22 +38,27 @@
             border-radius: 0.5rem;
             overflow-x: auto;
         }
+
         .prose-custom blockquote {
             border-left: 4px solid #4DA886;
             padding-left: 1rem;
             color: #4b5563;
         }
+
         .prose-custom table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        .prose-custom th, .prose-custom td {
+
+        .prose-custom th,
+        .prose-custom td {
             border: 1px solid #e5e7eb;
             padding: 0.75rem;
             text-align: left;
         }
+
         .prose-custom th {
             background-color: #f9fafb;
             font-weight: 600;
@@ -69,7 +78,665 @@
             }
         }
     </script>
+    <style>
+        *,
+        ::before,
+        ::after {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        ::backdrop {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        /* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb
+        }
+
+        ::after,
+        ::before {
+            --tw-content: ''
+        }
+
+        :host,
+        html {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            margin: 0;
+            line-height: inherit
+        }
+
+        hr {
+            height: 0;
+            color: inherit;
+            border-top-width: 1px
+        }
+
+        abbr:where([title]) {
+            -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: inherit;
+            font-weight: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            font-size: 1em
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        table {
+            text-indent: 0;
+            border-color: inherit;
+            border-collapse: collapse
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: inherit;
+            font-feature-settings: inherit;
+            font-variation-settings: inherit;
+            font-size: 100%;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        button,
+        input:where([type=button]),
+        input:where([type=reset]),
+        input:where([type=submit]) {
+            -webkit-appearance: button;
+            background-color: transparent;
+            background-image: none
+        }
+
+        :-moz-focusring {
+            outline: auto
+        }
+
+        :-moz-ui-invalid {
+            box-shadow: none
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            outline-offset: -2px
+        }
+
+        ::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        summary {
+            display: list-item
+        }
+
+        blockquote,
+        dd,
+        dl,
+        figure,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr,
+        p,
+        pre {
+            margin: 0
+        }
+
+        fieldset {
+            margin: 0;
+            padding: 0
+        }
+
+        legend {
+            padding: 0
+        }
+
+        menu,
+        ol,
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        dialog {
+            padding: 0
+        }
+
+        textarea {
+            resize: vertical
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            opacity: 1;
+            color: #9ca3af
+        }
+
+        [role=button],
+        button {
+            cursor: pointer
+        }
+
+        :disabled {
+            cursor: default
+        }
+
+        audio,
+        canvas,
+        embed,
+        iframe,
+        img,
+        object,
+        svg,
+        video {
+            display: block;
+            vertical-align: middle
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto
+        }
+
+        [hidden]:where(:not([hidden=until-found])) {
+            display: none
+        }
+
+        .sticky {
+            position: sticky
+        }
+
+        .top-0 {
+            top: 0px
+        }
+
+        .z-30 {
+            z-index: 30
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .my-8 {
+            margin-top: 2rem;
+            margin-bottom: 2rem
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem
+        }
+
+        .mr-3 {
+            margin-right: 0.75rem
+        }
+
+        .mt-12 {
+            margin-top: 3rem
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem
+        }
+
+        .mt-4 {
+            margin-top: 1rem
+        }
+
+        .mt-6 {
+            margin-top: 1.5rem
+        }
+
+        .flex {
+            display: flex
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .h-16 {
+            height: 4rem
+        }
+
+        .h-6 {
+            height: 1.5rem
+        }
+
+        .h-8 {
+            height: 2rem
+        }
+
+        .w-6 {
+            width: 1.5rem
+        }
+
+        .w-auto {
+            width: auto
+        }
+
+        .max-w-none {
+            max-width: none
+        }
+
+        .max-w-screen-xl {
+            max-width: 1280px
+        }
+
+        .flex-shrink-0 {
+            flex-shrink: 0
+        }
+
+        .list-disc {
+            list-style-type: disc
+        }
+
+        .items-center {
+            align-items: center
+        }
+
+        .justify-between {
+            justify-content: space-between
+        }
+
+        .space-y-2> :not([hidden])~ :not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(0.5rem * var(--tw-space-y-reverse))
+        }
+
+        .scroll-smooth {
+            scroll-behavior: smooth
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem
+        }
+
+        .rounded-md {
+            border-radius: 0.375rem
+        }
+
+        .border-b {
+            border-bottom-width: 1px
+        }
+
+        .border-t {
+            border-top-width: 1px
+        }
+
+        .border-gray-200 {
+            --tw-border-opacity: 1;
+            border-color: rgb(229 231 235 / var(--tw-border-opacity, 1))
+        }
+
+        .bg-blue-100 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-gray-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-green-100 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-white {
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1))
+        }
+
+        .p-6 {
+            padding: 1.5rem
+        }
+
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem
+        }
+
+        .py-6 {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem
+        }
+
+        .pl-6 {
+            padding-left: 1.5rem
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem
+        }
+
+        .font-bold {
+            font-weight: 700
+        }
+
+        .font-semibold {
+            font-weight: 600
+        }
+
+        .text-blue-800 {
+            --tw-text-opacity: 1;
+            color: rgb(30 64 175 / var(--tw-text-opacity, 1))
+        }
+
+        .text-gray-500 {
+            --tw-text-opacity: 1;
+            color: rgb(107 114 128 / var(--tw-text-opacity, 1))
+        }
+
+        .text-gray-600 {
+            --tw-text-opacity: 1;
+            color: rgb(75 85 99 / var(--tw-text-opacity, 1))
+        }
+
+        .text-gray-700 {
+            --tw-text-opacity: 1;
+            color: rgb(55 65 81 / var(--tw-text-opacity, 1))
+        }
+
+        .text-green-800 {
+            --tw-text-opacity: 1;
+            color: rgb(22 101 52 / var(--tw-text-opacity, 1))
+        }
+
+        .text-healthcare-green {
+            --tw-text-opacity: 1;
+            color: rgb(77 168 134 / var(--tw-text-opacity, 1))
+        }
+
+        .text-trust-blue {
+            --tw-text-opacity: 1;
+            color: rgb(30 54 95 / var(--tw-text-opacity, 1))
+        }
+
+        .shadow-sm {
+            --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .ring-1 {
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)
+        }
+
+        .ring-gray-900\/5 {
+            --tw-ring-color: rgb(17 24 39 / 0.05)
+        }
+
+        @media (min-width: 640px) {
+            .sm\:p-8 {
+                padding: 2rem
+            }
+
+            .sm\:px-6 {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem
+            }
+        }
+
+        @media (min-width: 768px) {
+            .md\:block {
+                display: block
+            }
+
+            .md\:py-12 {
+                padding-top: 3rem;
+                padding-bottom: 3rem
+            }
+
+            .md\:text-4xl {
+                font-size: 2.25rem;
+                line-height: 2.5rem
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:p-10 {
+                padding: 2.5rem
+            }
+
+            .lg\:px-8 {
+                padding-left: 2rem;
+                padding-right: 2rem
+            }
+        }
+    </style>
 </head>
+
 <body class="bg-gray-50 text-gray-700">
     <!-- Header -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-30">
@@ -77,10 +744,11 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <img class="h-8 w-auto" src="https://naomedical.com/main-page-assets/images/Nao-Medical-Logo-3.svg" alt="Nao Medical Logo">
+                    <img class="h-8 w-auto" src="https://naomedical.com/main-page-assets/images/Nao-Medical-Logo-3.svg"
+                        alt="Nao Medical Logo">
                 </div>
                 <div class="hidden md:block">
-                    <a href="https://dataanalystnaomedical.github.io/naomedical-fhir/"> 
+                    <a href="https://dataanalystnaomedical.github.io/naomedical-fhir/">
                         <p class="text-trust-blue font-semibold">Back To Service Documentation</p>
                     </a>
                 </div>
@@ -91,34 +759,47 @@
     <!-- Main Content -->
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <main>
-            <article class="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-sm ring-1 ring-gray-900/5 prose-custom max-w-none">
+            <article
+                class="bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-sm ring-1 ring-gray-900/5 prose-custom max-w-none">
                 <div class="mb-8">
                     <span class="text-healthcare-green font-semibold">API Reference</span>
                     <h1 class="text-3xl md:text-4xl font-bold text-trust-blue mt-2">Vendor API Documentation</h1>
-                    <p class="text-lg text-gray-600 mt-4">These endpoints allow secure access to patient and FHIR data for approved vendors. All requests must include the <code>apiKey</code> header.</p>
+                    <p class="text-lg text-gray-600 mt-4">These endpoints allow secure access to patient and FHIR data
+                        for approved vendors. All requests must include the <code>apiKey</code> header.</p>
                 </div>
 
-                <hr class="my-8"/>
+                <hr class="my-8">
 
 
                 <section id="authentication">
                     <h2 class="flex items-center text-2xl font-semibold text-trust-blue">
-                        <svg class="w-6 h-6 mr-3 text-healthcare-green"viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000" style="
+                        <svg class="w-6 h-6 mr-3 text-healthcare-green" viewBox="0 0 16 16"
+                            xmlns="http://www.w3.org/2000/svg" fill="#000000" style="
                             height: 18px;
-                        "><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="m 8.074219 0 c -1.203125 -0.0117188 -2.40625 0.285156 -3.492188 0.890625 c -0.480469 0.269531 -0.652343 0.878906 -0.382812 1.359375 c 0.269531 0.484375 0.878906 0.65625 1.359375 0.386719 c 1.550781 -0.867188 3.4375 -0.847657 4.972656 0.050781 c 1.53125 0.898438 2.46875 2.535156 2.46875 4.3125 v 1 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -1 c 0 -0.019531 0 -0.039062 -0.003906 -0.054688 c -0.019532 -2.460937 -1.332032 -4.738281 -3.457032 -5.984374 c -1.070312 -0.628907 -2.265624 -0.9492192 -3.46875 -0.960938 z m -5.199219 2.832031 c -0.066406 0 -0.132812 0.007813 -0.195312 0.023438 c -0.257813 0.058593 -0.484376 0.21875 -0.625 0.445312 c -0.6875 1.109375 -1.054688 2.390625 -1.054688 3.699219 v 5.0625 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -5.0625 c 0 -0.933594 0.261719 -1.851562 0.753906 -2.644531 c 0.292969 -0.46875 0.148438 -1.082031 -0.320312 -1.375 c -0.167969 -0.105469 -0.363282 -0.15625 -0.558594 -0.148438 z m 5.125 0.167969 c -2.199219 0 -4 1.800781 -4 4 v 1 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -1 c 0 -1.117188 0.882812 -2 2 -2 s 2 0.882812 2 2 v 5 s 0.007812 0.441406 0.175781 0.941406 s 0.5 1.148438 1.117188 1.765625 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 s 0.390625 -1.023437 0 -1.414062 c -0.382812 -0.382813 -0.550781 -0.734375 -0.632812 -0.984375 s -0.074219 -0.308594 -0.074219 -0.308594 v -5 c 0 -2.199219 -1.800781 -4 -4 -4 z m 0 3 c -0.550781 0 -1 0.449219 -1 1 v 5 s 0 0.59375 0.144531 1.320312 c 0.144531 0.726563 0.414063 1.652344 1.148438 2.386719 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 s 0.390625 -1.023437 0 -1.414062 c -0.265625 -0.265625 -0.496093 -0.839844 -0.601562 -1.363281 c -0.105469 -0.523438 -0.105469 -0.929688 -0.105469 -0.929688 v -5 c 0 -0.550781 -0.449219 -1 -1 -1 z m -3 4 c -0.550781 0 -1 0.449219 -1 1 v 3 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -3 c 0 -0.550781 -0.449219 -1 -1 -1 z m 9 0 c -0.550781 0 -1 0.449219 -1 1 s 0.449219 1 1 1 s 1 -0.449219 1 -1 s -0.449219 -1 -1 -1 z m 0 0" fill="#a9eac8"></path> </g></svg>
+                        ">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="m 8.074219 0 c -1.203125 -0.0117188 -2.40625 0.285156 -3.492188 0.890625 c -0.480469 0.269531 -0.652343 0.878906 -0.382812 1.359375 c 0.269531 0.484375 0.878906 0.65625 1.359375 0.386719 c 1.550781 -0.867188 3.4375 -0.847657 4.972656 0.050781 c 1.53125 0.898438 2.46875 2.535156 2.46875 4.3125 v 1 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -1 c 0 -0.019531 0 -0.039062 -0.003906 -0.054688 c -0.019532 -2.460937 -1.332032 -4.738281 -3.457032 -5.984374 c -1.070312 -0.628907 -2.265624 -0.9492192 -3.46875 -0.960938 z m -5.199219 2.832031 c -0.066406 0 -0.132812 0.007813 -0.195312 0.023438 c -0.257813 0.058593 -0.484376 0.21875 -0.625 0.445312 c -0.6875 1.109375 -1.054688 2.390625 -1.054688 3.699219 v 5.0625 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -5.0625 c 0 -0.933594 0.261719 -1.851562 0.753906 -2.644531 c 0.292969 -0.46875 0.148438 -1.082031 -0.320312 -1.375 c -0.167969 -0.105469 -0.363282 -0.15625 -0.558594 -0.148438 z m 5.125 0.167969 c -2.199219 0 -4 1.800781 -4 4 v 1 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -1 c 0 -1.117188 0.882812 -2 2 -2 s 2 0.882812 2 2 v 5 s 0.007812 0.441406 0.175781 0.941406 s 0.5 1.148438 1.117188 1.765625 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 s 0.390625 -1.023437 0 -1.414062 c -0.382812 -0.382813 -0.550781 -0.734375 -0.632812 -0.984375 s -0.074219 -0.308594 -0.074219 -0.308594 v -5 c 0 -2.199219 -1.800781 -4 -4 -4 z m 0 3 c -0.550781 0 -1 0.449219 -1 1 v 5 s 0 0.59375 0.144531 1.320312 c 0.144531 0.726563 0.414063 1.652344 1.148438 2.386719 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 s 0.390625 -1.023437 0 -1.414062 c -0.265625 -0.265625 -0.496093 -0.839844 -0.601562 -1.363281 c -0.105469 -0.523438 -0.105469 -0.929688 -0.105469 -0.929688 v -5 c 0 -0.550781 -0.449219 -1 -1 -1 z m -3 4 c -0.550781 0 -1 0.449219 -1 1 v 3 c 0 0.550781 0.449219 1 1 1 s 1 -0.449219 1 -1 v -3 c 0 -0.550781 -0.449219 -1 -1 -1 z m 9 0 c -0.550781 0 -1 0.449219 -1 1 s 0.449219 1 1 1 s 1 -0.449219 1 -1 s -0.449219 -1 -1 -1 z m 0 0"
+                                    fill="#a9eac8"></path>
+                            </g>
+                        </svg>
 
                         Authentication
                     </h2>
                     <p>All API requests must include the following HTTP header:</p>
                     <pre><code>apiKey: YOUR_API_KEY_HERE</code></pre>
                 </section>
-                
-                
-                <hr class="my-8"/>
+
+
+                <hr class="my-8">
 
                 <section id="lookup-patient">
                     <h2 class="flex items-center text-2xl font-semibold text-trust-blue">1. Lookup Patient</h2>
-                    <p class="mt-4"><span class="font-semibold bg-green-100 text-green-800 rounded-md px-2 py-1 text-sm">GET</span> <code>/api/lookup-patient</code></p>
+                    <p class="mt-4"><span
+                            class="font-semibold bg-green-100 text-green-800 rounded-md px-2 py-1 text-sm">GET</span>
+                        <code>/api/lookup-patient</code></p>
                     <p class="mt-4">Returns a list of all matched patients based on provided criteria.</p>
                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameters (required):</h3>
                     <ul class="list-disc pl-6 space-y-2 mt-2">
@@ -127,7 +808,7 @@
                         <li><code>dob</code> (YYYY-MM-DD)</li>
                     </ul>
                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request:</h3>
-                    <pre><code class="language-bash">curl -X GET "https://yourdomain.com/api/lookup-patient?firstName=John&lastName=Doe&dob=1980-01-01" \
+                    <pre><code class="language-bash">curl -X GET "https://yourdomain.com/api/lookup-patient?firstName=John&amp;lastName=Doe&amp;dob=1980-01-01" \
   -H "apiKey: YOUR_API_KEY_HERE"</code></pre>
                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Response:</h3>
                     <pre><code class="language-json">{
@@ -148,11 +829,14 @@
 }</code></pre>
                 </section>
 
-                <hr class="my-8"/>
+                <hr class="my-8">
 
                 <section id="generate-mrn">
-                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">2. Generate MRN (Create Lead)</h2>
-                    <p class="mt-4"><span class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span> <code>/api/generate-mrn</code></p>
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">2. Generate MRN (Create Lead)
+                    </h2>
+                    <p class="mt-4"><span
+                            class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span>
+                        <code>/api/generate-mrn</code></p>
                     <p class="mt-4">Creates a new patient lead and returns the generated MRN and timestamps.</p>
                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Required JSON Body:</h3>
                     <pre><code class="language-json">{
@@ -193,13 +877,16 @@
 }</code></pre>
                 </section>
 
-                <hr class="my-8"/>
+                <hr class="my-8">
 
                 <section id="request-fhir">
-                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">3. Request FHIR Data</h2>
-                    <p class="mt-4"><span class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span> <code>/api/request-fhir-data?mrn=GENERATEDMRN</code></p>
-                    <p class="mt-4">Triggers a FHIR data pull for a patient using their MRN. The MRN must be provided as a query parameter.</p>
-                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameter (required):</h3>
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">3a. Request FHIR Data</h2>
+                    <p class="mt-4"><span
+                            class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span>
+                        <code>/api/request-fhir-data?mrn=GENERATEDMRN</code></p>
+                    <p class="mt-4">Triggers a FHIR data pull for a patient using their MRN. The MRN must be provided as
+                        a query parameter.</p>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameter (required):</h3>
                     <ul class="list-disc pl-6 space-y-2 mt-2">
                         <li><code>mrn</code> (string) — The MRN (patient account number) to request FHIR data for.</li>
                     </ul>
@@ -213,13 +900,59 @@
 }</code></pre>
                 </section>
 
-                <hr class="my-8"/>
-                
+                <hr class="my-8">
+                <!-- SECTION 2: Request FHIR Data -->
+                <section id="request-fhir-data-2" class="mt-12">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">3b. Request FHIR Data with
+                        Provider Info</h2>
+                    <p class="mt-4"><span
+                            class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span>
+                        <code>/api/request-fhir-data-2</code></p>
+                    <p class="mt-4">Submits a request to generate or retrieve FHIR data based on patient and provider
+                        identifiers sent in the request body.</p>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Headers (required):</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>Content-Type</code> (string) — Must be set to <code>application/json</code>.</li>
+                        <li><code>apiKey</code> (string) — Your unique API key for authentication.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Request Body (JSON, required):</h3>
+                    <p class="mt-2">The following JSON object must be sent in the request body:</p>
+                    <pre><code class="language-json">{
+  "mrn": "string",
+  "prov_npi": "string",
+  "prov_first_name": "string",
+  "prov_last_name": "string"
+}</code></pre>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request (cURL):</h3>
+                    <pre><code class="language-bash">curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "apiKey: YOUR_API_KEY_HERE" \
+  -d '{
+    "mrn": "patient-mrn-12345",
+    "prov_npi": "1234567890",
+    "prov_first_name": "John",
+    "prov_last_name": "Doe"
+  }' \
+  "https://yourdomain.com/api/request-fhir-data-2</code></pre>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Response (Hypothetical):</h3>
+                    <p class="mt-2">A successful request will likely return a status indicating the job has been queued.
+                    </p>
+                    <pre><code class="language-json">{"patient": {"mrn": {"root": "encrypted message", "extension": "extension val"}........ }</code></pre>
+                </section>
+
+
                 <section id="pdf-status">
-                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">4. PDF Status</h2>
-                    <p class="mt-4"><span class="font-semibold bg-green-100 text-green-800 rounded-md px-2 py-1 text-sm">GET</span> <code>/api/pdf-status?mrn=GENERATEDMRN</code></p>
-                    <p class="mt-4">Checks the PDF file sync status for a given MRN. Returns whether the PDF is synced, pending, or not found.</p>
-                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameter (required):</h3>
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">4a. PDF Status</h2>
+                    <p class="mt-4"><span
+                            class="font-semibold bg-green-100 text-green-800 rounded-md px-2 py-1 text-sm">GET</span>
+                        <code>/api/pdf-status?mrn=GENERATEDMRN</code></p>
+                    <p class="mt-4">Checks the PDF file sync status for a given MRN. Returns whether the PDF is synced,
+                        pending, or not found.</p>
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameter (required):</h3>
                     <ul class="list-disc pl-6 space-y-2 mt-2">
                         <li><code>mrn</code> (string) — The MRN (patient account number) to check status for.</li>
                     </ul>
@@ -252,16 +985,69 @@
 }</code></pre>
                 </section>
 
-                <hr class="my-8"/>
+                <hr class="my-8">
+                <!-- SECTION 1: Get FHIR JSON -->
+                <section id="get-fhir-json" class="mt-12">
+                    <h2 class="flex items-center text-2xl font-semibold text-trust-blue">4b. Get FHIR JSON</h2>
+                    <p class="mt-4"><span
+                            class="font-semibold bg-green-100 text-green-800 rounded-md px-2 py-1 text-sm">GET</span>
+                        <code>/api/get-fhir-json</code></p>
+                    <p class="mt-4">Retrieves a specific FHIR JSON Bundle from a Google Cloud Storage (GCS) location.
+                    </p>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Query Parameter (required):</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>gcs_uri</code> (string) — The full GCS path to the FHIR JSON file you want to
+                            retrieve.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Headers (required):</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
+                        <li><code>Content-Type</code> (string) — Must be set to <code>application/json</code>.</li>
+                        <li><code>apiKey</code> (string) — Your unique API key for authentication.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Request (cURL):</h3>
+                    <pre><code class="language-bash">curl -X GET ""https://yourdomain.com/api/get-fhir-json?gcs_uri=gs://connective_health_prod_feb7/2130735857111368_..._PATIENT_EVERYTHING.json" \
+-H "Content-Type: application/json" \
+-H "apiKey: YOUR_API_KEY_HERE"</code></pre>
+
+                    <h3 class="text-lg font-semibold text-trust-blue mt-6">Example Success Response (200 OK):</h3>
+                    <pre><code class="language-json">{
+  "resourceType": "Bundle",
+  "id": "4d20fe8f-dd31-43c1-8d86-08f4dd48976f",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-79ff3b3951012c589b839fb5d08cbbff",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-79ff3b3951012c589b839fb5d08cbbff",
+        "meta": {
+          "source": "https://connectivehealth.io",
+          "profile": [
+            "http://hl7.org/fhir/us/core..."
+          ]
+        }
+        // ... remainder of Patient resource
+      }
+    }
+    // ... other entries in the bundle
+  ]
+}</code></pre>
+                </section>
 
                 <section id="temporary-link">
                     <h2 class="flex items-center text-2xl font-semibold text-trust-blue">5. Generate Temporary Link</h2>
-                    <p class="mt-4"><span class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span> <code>/api/get-temporary-link</code></p>
-                     <p class="mt-4">Generates a time-limited access link for a vendor to retrieve a specific resource stored in Google Cloud Storage.</p>
+                    <p class="mt-4"><span
+                            class="font-semibold bg-blue-100 text-blue-800 rounded-md px-2 py-1 text-sm">POST</span>
+                        <code>/api/get-temporary-link</code></p>
+                    <p class="mt-4">Generates a time-limited access link for a vendor to retrieve a specific resource
+                        stored in Google Cloud Storage.</p>
                     <blockquote>Note: here we can use the parsed response from pdf-status endpoint</blockquote>
-                    
+
                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Request Headers:</h3>
-                     <ul class="list-disc pl-6 space-y-2 mt-2">
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
                         <li><code>Content-Type: application/json</code> (required)</li>
                         <li><code>apiKey: your-key</code> (required)</li>
                     </ul>
@@ -301,29 +1087,30 @@
     "expiration_time": 120
   }' \
   https://fhir-demo-564097302460.us-central1.run.app/api/get-temporary-link</code></pre>
-                    
+
                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Success Response (200 OK):</h3>
                     <pre><code class="language-json">{
-  "temporary_url": "https://storage.googleapis.com/...?GoogleAccessId=...&Expires=...&Signature=...",
+  "temporary_url": "https://storage.googleapis.com/...?GoogleAccessId=...&amp;Expires=...&amp;Signature=...",
   "expiration_time": 120,
   "expires_at": "2025-07-26T15:30:45Z"
 }</code></pre>
 
                     <h3 class="text-lg font-semibold text-trust-blue mt-6">Error Responses:</h3>
-                     <ul class="list-disc pl-6 space-y-2 mt-2">
+                    <ul class="list-disc pl-6 space-y-2 mt-2">
                         <li><code>400 Bad Request</code> - Invalid request parameters</li>
                         <li><code>401 Unauthorized</code> - Invalid or missing API key</li>
                         <li><code>404 Not Found</code> - The specified file does not exist</li>
                         <li><code>500 Internal Server Error</code> - Server error while processing the request</li>
                     </ul>
                 </section>
-                
-                <hr class="my-8"/>
-                
+
+                <hr class="my-8">
+
                 <section id="error-handling">
                     <h2 class="flex items-center text-2xl font-semibold text-trust-blue">Error Handling</h2>
                     <ul class="list-disc pl-6 space-y-2 mt-4">
-                        <li>All errors are returned as JSON with an <code>error</code> field and appropriate HTTP status code.</li>
+                        <li>All errors are returned as JSON with an <code>error</code> field and appropriate HTTP status
+                            code.</li>
                         <li>Example:
                             <pre><code class="language-json">{
   "error": "Missing required fields: firstName, lastName, dob"
@@ -334,14 +1121,17 @@
             </article>
         </main>
     </div>
-    
+
     <!-- Footer -->
     <footer class="bg-white mt-12 border-t">
         <div class="max-w-screen-xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
-            <p>&copy; 2024 Nao Medical. All Rights Reserved.</p>
+            <p>© 2025 Nao Medical. All Rights Reserved.</p>
         </div>
     </footer>
+
+
+
+
 </body>
+
 </html>
-
-
